@@ -1,0 +1,14 @@
+{
+  "name": "browser-console-badges",
+  "version": "0.0.1",
+  "description": "browser-console-badges",
+  "manifest_version": 3,
+  "host_permissions": ["<all_urls>"],
+  "content_scripts": [
+    {
+      "matches": ["file://*/*", "http://*/*", "https://*/*"],
+      "js": ["../src/content-script.js"],
+      "run_at": "document_start"
+    }
+  ]
+}

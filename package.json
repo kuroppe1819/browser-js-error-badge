@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
+    "build": "parcel build public/manifest.json --dist-dir dist --no-cache",
+    "watch": "parcel watch public/manifest.json --dist-dir dist",
     "prepare": "husky install"
   },
   "author": "kuroppe1819",
@@ -26,7 +28,11 @@
     "extends": [
       "eslint:recommended",
       "prettier"
-    ]
+    ],
+    "env": {
+      "browser": true,
+      "esNext": true
+    }
   },
   "lint-staged": {
     "*.{js,css,md}": [
