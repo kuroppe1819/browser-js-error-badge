@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "dist": "mkdir -p ./dist && cp -f public/* src/* ./dist/",
+    "dist": "mkdir -p ./dist && cp -rf public/* src/* ./dist/",
     "prepare": "husky install"
   },
   "author": "kuroppe1819",

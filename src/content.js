@@ -5,7 +5,7 @@ const createBadgeCountElement = ({ text }) => {
   badgeCountEl.style.paddingLeft = "2px";
   badgeCountEl.style.paddingRight = "2px";
   badgeCountEl.style.color = "#FFFFFF";
-  badgeCountEl.style.background = "#030712";
+  badgeCountEl.style.background = "#111827";
   badgeCountEl.style.position = "fixed";
   badgeCountEl.style.top = "0";
   badgeCountEl.style.left = "0";
