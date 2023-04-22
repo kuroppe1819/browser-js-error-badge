@@ -2,17 +2,8 @@ import { BrowserJsErrorBadgeConfig } from "./config";
 
 const createBadgeCountElement = ({ text }) => {
   const badgeCountEl = document.createElement("div");
-  badgeCountEl.id = "browser-js-error-badge-count";
+  badgeCountEl.setAttribute("id", "browser-js-error-badge-count");
   badgeCountEl.textContent = text;
-  badgeCountEl.style.paddingLeft = "2px";
-  badgeCountEl.style.paddingRight = "2px";
-  badgeCountEl.style.color = "#FFFFFF";
-  badgeCountEl.style.background = "#111827";
-  badgeCountEl.style.position = "fixed";
-  badgeCountEl.style.top = "0";
-  badgeCountEl.style.left = "0";
-  badgeCountEl.style.zIndex = "2147483647";
-  badgeCountEl.style.fontSize = "16px";
   return badgeCountEl;
 };
 
@@ -21,16 +12,13 @@ const getBadgeCountElement = () => {
 };
 
 const setBrowserJsErrorBadgeEnabled = (enabled) => {
-  // document.body.dataset.marktoneEnabled = enabled.toString();
-
-  // if (enabled) {
-  //   document.body.classList.remove("marktone-disabled");
-  // } else {
-  //   document.body.classList.add("marktone-disabled");
-  // }
-
   const badgeCountEl = getBadgeCountElement();
-  badgeCountEl.style.display = enabled ? "block" : "none";
+
+  if (enabled) {
+    badgeCountEl.classList.remove("browser-js-error-badge-count-disabled");
+  } else {
+    badgeCountEl.classList.add("browser-js-error-badge-count-disabled");
+  }
 };
 
 BrowserJsErrorBadgeConfig.loadEnabled(setBrowserJsErrorBadgeEnabled);

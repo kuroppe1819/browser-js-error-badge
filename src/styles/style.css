@@ -1,0 +1,15 @@
+#browser-js-error-badge-count {
+  padding-left: 2px;
+  padding-right: 2px;
+  color: #ffffff;
+  background: #111827;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2147483647;
+  font-size: 16px;
+}
+
+.browser-js-error-badge-count-disabled {
+  display: none;
+}

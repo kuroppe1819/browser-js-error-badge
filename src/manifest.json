@@ -9,7 +9,7 @@
     "128": "icons/icon128.png"
   },
   "host_permissions": ["file://*/*", "http://*/*", "https://*/*"],
-  "permissions": ["tabs", "storage"],
+  "permissions": ["storage"],
   "action": {
     "default_title": "BrowserJsErrorBadge",
     "default_icon": {
@@ -21,6 +21,7 @@
   "content_scripts": [
     {
       "js": ["content.js"],
+      "css": ["styles/style.css"],
       "matches": ["file://*/*", "http://*/*", "https://*/*"],
       "run_at": "document_start"
     }
