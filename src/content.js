@@ -10,6 +10,4 @@
 
     document.documentElement.style.border = "4px solid #DC2626";
   });
-
-  await chrome.runtime.sendMessage({ eventName: "content_loaded" });
 })();

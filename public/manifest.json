@@ -4,17 +4,22 @@
   "description": "browser-console-badge",
   "manifest_version": 3,
   "host_permissions": ["file://*/*", "http://*/*", "https://*/*"],
-  "permissions": ["activeTab", "scripting"],
   "action": {},
   "content_scripts": [
     {
-      "js": ["../src/content.js"],
+      "js": ["content.js"],
       "matches": ["file://*/*", "http://*/*", "https://*/*"],
       "run_at": "document_start"
+    },
+    {
+      "js": ["inject.js"],
+      "matches": ["file://*/*", "http://*/*", "https://*/*"],
+      "run_at": "document_start",
+      "world": "MAIN"
     }
   ],
   "background": {
-    "service_worker": "../src/background.js",
+    "service_worker": "background.js",
     "type": "module"
   }
 }
