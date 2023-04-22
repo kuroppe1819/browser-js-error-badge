@@ -5,6 +5,7 @@
   "manifest_version": 3,
   "host_permissions": ["file://*/*", "http://*/*", "https://*/*"],
   "permissions": ["activeTab", "scripting"],
+  "action": {},
   "content_scripts": [
     {
       "js": ["../src/content.js"],

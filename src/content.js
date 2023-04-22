@@ -1,10 +1,15 @@
 (async () => {
   let errorCount = 0;
 
-  document.addEventListener("ErrorToExtension", () => {
+  document.addEventListener("ErrorToExtension", async () => {
     errorCount++;
-    console.log(errorCount);
+    await chrome.runtime.sendMessage({
+      eventName: "error_occurred",
+      value: { errorCount: errorCount.toString() },
+    });
+
+    document.documentElement.style.border = "4px solid #DC2626";
   });
 
-  await chrome.runtime.sendMessage({ text: "content_loaded" });
+  await chrome.runtime.sendMessage({ eventName: "content_loaded" });
 })();

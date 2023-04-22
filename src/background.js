@@ -14,7 +14,7 @@ const injectScript = () => {
 };
 
 chrome.runtime.onMessage.addListener(async (msg, sender) => {
-  if (msg.text === "content_loaded") {
+  if (msg.eventName === "content_loaded") {
     await chrome.scripting.executeScript({
       target: {
         tabId: sender.tab.id,
@@ -23,6 +23,21 @@ chrome.runtime.onMessage.addListener(async (msg, sender) => {
       func: injectScript,
       injectImmediately: true,
       world: "MAIN",
+    });
+  } else if (msg.eventName === "error_occurred") {
+    await chrome.action.setBadgeText({
+      tabId: sender.tab.id,
+      text: msg.value.errorCount,
+    });
+
+    await chrome.action.setBadgeTextColor({
+      tabId: sender.tab.id,
+      color: "#FFFFFF",
+    });
+
+    await chrome.action.setBadgeBackgroundColor({
+      tabId: sender.tab.id,
+      color: "#DC2626",
     });
   }
 });
