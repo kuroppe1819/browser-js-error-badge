@@ -1,5 +1,5 @@
 {
-  "name": "browser-console-badges",
+  "name": "browser-js-error-badge",
   "version": "1.0.0",
   "description": "",
   "scripts": {
@@ -13,16 +13,12 @@
     "@commitlint/cli": "^17.5.1",
     "@commitlint/config-conventional": "^17.4.4",
     "@parcel/config-webextension": "^2.8.3",
-    "@types/webextension-polyfill": "^0.10.0",
     "eslint": "^8.38.0",
     "eslint-config-prettier": "^8.8.0",
     "husky": "^8.0.3",
     "lint-staged": "^13.2.1",
     "parcel": "^2.8.3",
     "prettier": "^2.8.7"
-  },
-  "dependencies": {
-    "webextension-polyfill": "^0.10.0"
   },
   "eslintConfig": {
     "extends": [
@@ -31,8 +27,12 @@
     ],
     "env": {
       "browser": true,
-      "esNext": true
-    }
+      "es2022": true,
+      "webextensions": true
+    },
+    "ignorePatterns": [
+      "dist/*"
+    ]
   },
   "lint-staged": {
     "*.{js,css,md}": [

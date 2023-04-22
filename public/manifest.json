@@ -1,14 +1,19 @@
 {
-  "name": "browser-console-badges",
+  "name": "browser-js-error-badge",
   "version": "0.0.1",
-  "description": "browser-console-badges",
+  "description": "browser-console-badge",
   "manifest_version": 3,
-  "host_permissions": ["<all_urls>"],
+  "host_permissions": ["file://*/*", "http://*/*", "https://*/*"],
+  "permissions": ["activeTab", "scripting"],
   "content_scripts": [
     {
+      "js": ["../src/content.js"],
       "matches": ["file://*/*", "http://*/*", "https://*/*"],
-      "js": ["../src/content-script.js"],
       "run_at": "document_start"
     }
-  ]
+  ],
+  "background": {
+    "service_worker": "../src/background.js",
+    "type": "module"
+  }
 }
