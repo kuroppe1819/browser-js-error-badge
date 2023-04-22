@@ -4,7 +4,10 @@
   "description": "browser-console-badge",
   "manifest_version": 3,
   "host_permissions": ["file://*/*", "http://*/*", "https://*/*"],
-  "action": {},
+  "permissions": ["tabs"],
+  "action": {
+    "default_title": "Switch display badge count"
+  },
   "content_scripts": [
     {
       "js": ["content.js"],

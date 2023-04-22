@@ -14,6 +14,10 @@ const createBadgeCountElement = ({ text }) => {
   return badgeCountEl;
 };
 
+const getBadgeCountElement = () => {
+  return document.getElementById("browser-js-error-badge-count");
+};
+
 (async () => {
   let errorCount = 0;
   document.addEventListener("ErrorToExtension", async () => {
@@ -23,9 +27,7 @@ const createBadgeCountElement = ({ text }) => {
       value: { errorCount: errorCount.toString() },
     });
 
-    const badgeCountEl = document.getElementById(
-      "browser-js-error-badge-count"
-    );
+    const badgeCountEl = getBadgeCountElement();
     if (badgeCountEl) {
       badgeCountEl.parentNode.removeChild(badgeCountEl);
     }
@@ -34,3 +36,11 @@ const createBadgeCountElement = ({ text }) => {
     );
   });
 })();
+
+chrome.runtime.onMessage.addListener(async (msg) => {
+  if (msg.eventName === "badge_clicked") {
+    const badgeCountEl = getBadgeCountElement();
+    badgeCountEl.style.display =
+      badgeCountEl.style.display === "none" ? "block" : "none";
+  }
+});

@@ -16,3 +16,10 @@ chrome.runtime.onMessage.addListener(async (msg, sender) => {
     });
   }
 });
+
+chrome.action.onClicked.addListener(async (tab) => {
+  if (!tab.active) return;
+  await chrome.tabs.sendMessage(tab.id, {
+    eventName: "badge_clicked",
+  });
+});
