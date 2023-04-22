@@ -1,26 +1,4 @@
-class BrowserJsErrorBadgeConfig {
-  static loadEnabled(func) {
-    chrome.storage.sync.get(["browserJsErrorBadgeEnabled"], (result) => {
-      let enabled = result.browserJsErrorBadgeEnabled;
-
-      if (enabled === undefined) enabled = true;
-
-      func(enabled);
-    });
-  }
-
-  static async saveEnabled(enabled) {
-    await chrome.storage.sync.set({ browserJsErrorBadgeEnabled: enabled });
-  }
-
-  static onEnabledChanged(func) {
-    chrome.storage.onChanged.addListener((changes) => {
-      if (changes.browserJsErrorBadgeEnabled) {
-        func(changes.browserJsErrorBadgeEnabled.newValue);
-      }
-    });
-  }
-}
+import { BrowserJsErrorBadgeConfig } from "./config";
 
 const setExtensionIcon = (enabled) => {
   const path = chrome.runtime.getURL(
@@ -52,12 +30,7 @@ chrome.runtime.onMessage.addListener(async (msg, sender) => {
   }
 });
 
-chrome.action.onClicked.addListener(async (tab) => {
-  if (!tab.active) return;
-  await chrome.tabs.sendMessage(tab.id, {
-    eventName: "badge_clicked",
-  });
-
+chrome.action.onClicked.addListener(() => {
   BrowserJsErrorBadgeConfig.loadEnabled((enabled) => {
     const newEnabled = !enabled;
     setExtensionIcon(newEnabled);

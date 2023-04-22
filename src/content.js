@@ -1,3 +1,5 @@
+import { BrowserJsErrorBadgeConfig } from "./config";
+
 const createBadgeCountElement = ({ text }) => {
   const badgeCountEl = document.createElement("div");
   badgeCountEl.id = "browser-js-error-badge-count";
@@ -18,29 +20,40 @@ const getBadgeCountElement = () => {
   return document.getElementById("browser-js-error-badge-count");
 };
 
-(async () => {
-  let errorCount = 0;
-  document.addEventListener("ErrorToExtension", async () => {
-    errorCount++;
-    await chrome.runtime.sendMessage({
-      eventName: "error_occurred",
-      value: { errorCount: errorCount.toString() },
-    });
+const setBrowserJsErrorBadgeEnabled = (enabled) => {
+  // document.body.dataset.marktoneEnabled = enabled.toString();
 
-    const badgeCountEl = getBadgeCountElement();
-    if (badgeCountEl) {
-      badgeCountEl.parentNode.removeChild(badgeCountEl);
-    }
-    document.documentElement.appendChild(
-      createBadgeCountElement({ text: `❌ ${errorCount}` })
-    );
+  // if (enabled) {
+  //   document.body.classList.remove("marktone-disabled");
+  // } else {
+  //   document.body.classList.add("marktone-disabled");
+  // }
+
+  const badgeCountEl = getBadgeCountElement();
+  badgeCountEl.style.display = enabled ? "block" : "none";
+};
+
+BrowserJsErrorBadgeConfig.loadEnabled(setBrowserJsErrorBadgeEnabled);
+BrowserJsErrorBadgeConfig.onEnabledChanged(setBrowserJsErrorBadgeEnabled);
+
+let errorCount = 0;
+document.addEventListener("ErrorToExtension", async () => {
+  errorCount++;
+  await chrome.runtime.sendMessage({
+    eventName: "error_occurred",
+    value: { errorCount: errorCount.toString() },
   });
-})();
 
-chrome.runtime.onMessage.addListener(async (msg) => {
-  if (msg.eventName === "badge_clicked") {
-    const badgeCountEl = getBadgeCountElement();
-    badgeCountEl.style.display =
-      badgeCountEl.style.display === "none" ? "block" : "none";
+  const badgeCountEl = getBadgeCountElement();
+  if (badgeCountEl) {
+    badgeCountEl.parentNode.removeChild(badgeCountEl);
   }
+  document.documentElement.appendChild(
+    createBadgeCountElement({ text: `❌ ${errorCount}` })
+  );
 });
+
+const injectScript = document.createElement("script");
+injectScript.src = chrome.runtime.getURL("inject.js");
+(document.head || document.documentElement).appendChild(injectScript);
+injectScript.parentNode.removeChild(injectScript);

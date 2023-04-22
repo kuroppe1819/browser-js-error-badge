@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "dist": "mkdir -p ./dist && cp -rf public/* src/* ./dist/",
+    "build": "parcel build src/manifest.json --dist-dir dist --no-cache",
+    "watch": "parcel watch src/manifest.json --dist-dir dist",
     "prepare": "husky install"
   },
   "author": "kuroppe1819",
@@ -11,11 +12,16 @@
   "devDependencies": {
     "@commitlint/cli": "^17.5.1",
     "@commitlint/config-conventional": "^17.4.4",
+    "@parcel/config-webextension": "^2.8.3",
     "eslint": "^8.38.0",
     "eslint-config-prettier": "^8.8.0",
     "husky": "^8.0.3",
     "lint-staged": "^13.2.1",
+    "parcel": "^2.8.3",
     "prettier": "^2.8.7"
+  },
+  "dependencies": {
+    "webextension-polyfill": "^0.10.0"
   },
   "eslintConfig": {
     "extends": [
@@ -26,6 +32,9 @@
       "browser": true,
       "es2022": true,
       "webextensions": true
+    },
+    "parserOptions": {
+      "sourceType": "module"
     },
     "ignorePatterns": [
       "dist/*"
