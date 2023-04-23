@@ -37,12 +37,11 @@
       "sourceType": "module"
     },
     "ignorePatterns": [
-      "dist/*",
-      "src/styles/*"
+      "dist/*"
     ]
   },
   "lint-staged": {
-    "*.{js,css,md}": [
+    "*.{js}": [
       "prettier --write",
       "eslint ./"
     ]
