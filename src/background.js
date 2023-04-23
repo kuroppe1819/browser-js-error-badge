@@ -1,36 +1,37 @@
+import browser from "webextension-polyfill";
 import { BrowserJsErrorBadgeConfig } from "./config";
 
 const setExtensionIcon = (enabled) => {
-  const path = chrome.runtime.getURL(
+  const path = browser.runtime.getURL(
     enabled ? "icons/icon48.png" : "icons/disabled-icon48.png"
   );
-  chrome.action.setIcon({ path });
+  browser.action.setIcon({ path });
 };
 
 BrowserJsErrorBadgeConfig.loadEnabled((enabled) => {
   setExtensionIcon(enabled);
 });
 
-chrome.runtime.onMessage.addListener(async (msg, sender) => {
+browser.runtime.onMessage.addListener((msg, sender) => {
   if (msg.eventName === "error_occurred") {
-    await chrome.action.setBadgeText({
+    browser.action.setBadgeText({
       tabId: sender.tab.id,
       text: msg.value.errorCount,
     });
 
-    await chrome.action.setBadgeTextColor({
+    browser.action.setBadgeTextColor({
       tabId: sender.tab.id,
       color: "#FFFFFF",
     });
 
-    await chrome.action.setBadgeBackgroundColor({
+    browser.action.setBadgeBackgroundColor({
       tabId: sender.tab.id,
       color: "#DC2626",
     });
   }
 });
 
-chrome.action.onClicked.addListener(() => {
+browser.action.onClicked.addListener(() => {
   BrowserJsErrorBadgeConfig.loadEnabled((enabled) => {
     const newEnabled = !enabled;
     setExtensionIcon(newEnabled);

@@ -1,20 +1,23 @@
+import browser from "webextension-polyfill";
+
 export class BrowserJsErrorBadgeConfig {
-  static loadEnabled(func) {
-    chrome.storage.sync.get(["browserJsErrorBadgeEnabled"], (result) => {
-      let enabled = result.browserJsErrorBadgeEnabled;
+  static async loadEnabled(func) {
+    const result = await browser.storage.sync.get([
+      "browserJsErrorBadgeEnabled",
+    ]);
+    let enabled = result.browserJsErrorBadgeEnabled;
 
-      if (enabled === undefined) enabled = true;
+    if (enabled === undefined) enabled = true;
 
-      func(enabled);
-    });
+    func(enabled);
   }
 
   static async saveEnabled(enabled) {
-    await chrome.storage.sync.set({ browserJsErrorBadgeEnabled: enabled });
+    await browser.storage.sync.set({ browserJsErrorBadgeEnabled: enabled });
   }
 
-  static onEnabledChanged(func) {
-    chrome.storage.onChanged.addListener((changes) => {
+  static async onEnabledChanged(func) {
+    await browser.storage.onChanged.addListener((changes) => {
       if (changes.browserJsErrorBadgeEnabled) {
         func(changes.browserJsErrorBadgeEnabled.newValue);
       }
