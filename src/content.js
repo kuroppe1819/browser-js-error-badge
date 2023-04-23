@@ -38,19 +38,23 @@ BrowserJsErrorBadgeConfig.onEnabledChanged(setBrowserJsErrorBadgeEnabled);
 
 let errorCount = 0;
 document.addEventListener("ErrorToExtension", () => {
-  errorCount++;
-  browser.runtime.sendMessage({
-    eventName: "error_occurred",
-    value: { errorCount: errorCount.toString() },
-  });
+  BrowserJsErrorBadgeConfig.loadEnabled((enabled) => {
+    if (!enabled) return;
 
-  const badgeCountEl = getBadgeCountElement();
-  if (badgeCountEl) {
-    badgeCountEl.parentNode.removeChild(badgeCountEl);
-  }
-  document.documentElement.appendChild(
-    createBadgeCountElement({ errorCount: errorCount.toString() })
-  );
+    errorCount++;
+    browser.runtime.sendMessage({
+      eventName: "error_occurred",
+      value: { errorCount: errorCount.toString() },
+    });
+
+    const badgeCountEl = getBadgeCountElement();
+    if (badgeCountEl) {
+      badgeCountEl.parentNode.removeChild(badgeCountEl);
+    }
+    document.documentElement.appendChild(
+      createBadgeCountElement({ errorCount: errorCount.toString() })
+    );
+  });
 });
 
 const injectScript = document.createElement("script");
