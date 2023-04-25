@@ -6,7 +6,7 @@ Browser JS Error Badge is a simple tool that helps you keep track of JavaScript 
 
 Add extenstion to your browser
 
-Google Chrome - In the works
+Google Chrome - https://chrome.google.com/webstore/detail/browser-js-error-badge/alnmeadckaeolemiacdddeooegfmaigl
 
 Firefox - In the works
 
