@@ -1,4 +1,4 @@
-# Browser Js Error Badge
+# Browser JS Error Badge
 
 Browser JS Error Badge is a simple tool that helps you keep track of JavaScript errors on your website by displaying a badge in the browser.
 
