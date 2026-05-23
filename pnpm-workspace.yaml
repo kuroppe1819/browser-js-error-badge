@@ -1,0 +1,11 @@
+strictDepBuilds: true
+allowBuilds:
+  "@parcel/watcher": true
+  "@swc/core": true
+  lmdb: true
+  msgpackr-extract: true
+minimumReleaseAge: 10080
+trustPolicy: no-downgrade
+blockExoticSubdeps: true
+verifyDepsBeforeRun: install
+saveExact: true

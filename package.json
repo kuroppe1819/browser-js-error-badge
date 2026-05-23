@@ -5,50 +5,18 @@
   "scripts": {
     "build": "parcel build src/manifest.json --dist-dir dist --no-cache",
     "watch": "parcel watch src/manifest.json --dist-dir dist",
-    "prepare": "husky install"
+    "check": "biome check",
+    "fix": "biome check --fix"
   },
   "author": "kuroppe1819",
   "license": "MIT",
+  "packageManager": "pnpm@11.2.2",
   "devDependencies": {
-    "@commitlint/cli": "^17.5.1",
-    "@commitlint/config-conventional": "^17.4.4",
-    "@parcel/config-webextension": "^2.8.3",
-    "eslint": "^8.38.0",
-    "eslint-config-prettier": "^8.8.0",
-    "husky": "^8.0.3",
-    "lint-staged": "^13.2.1",
-    "parcel": "^2.8.3",
-    "prettier": "^2.8.7"
+    "@biomejs/biome": "2.4.15",
+    "@parcel/config-webextension": "2.16.4",
+    "parcel": "2.16.4"
   },
   "dependencies": {
-    "webextension-polyfill": "^0.10.0"
-  },
-  "eslintConfig": {
-    "extends": [
-      "eslint:recommended",
-      "prettier"
-    ],
-    "env": {
-      "browser": true,
-      "es2022": true,
-      "webextensions": true
-    },
-    "parserOptions": {
-      "sourceType": "module"
-    },
-    "ignorePatterns": [
-      "dist/*"
-    ]
-  },
-  "lint-staged": {
-    "*.{js}": [
-      "prettier --write",
-      "eslint ./"
-    ]
-  },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ]
+    "webextension-polyfill": "0.12.0"
   }
 }
